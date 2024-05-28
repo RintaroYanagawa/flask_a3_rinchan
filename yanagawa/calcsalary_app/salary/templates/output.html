@@ -1,0 +1,20 @@
+{% extends "layout.html" %} {% block body %}
+<div class="space-y-3">
+  <div>
+    <p class="text-lg text-natural-black">
+      給与:{{ "{:,}".format(salary) }}の場合、支給額:{{
+      "{:,}".format(pay_amount) }}円、税額:{{ "{:,}".format(tax_amount)
+      }}円です。
+    </p>
+  </div>
+  <div>
+    <button
+      type="button"
+      class="btn btn-primary btn-sm text-lg"
+      onclick="location.href='/'"
+    >
+      戻る
+    </button>
+  </div>
+</div>
+{% endblock %}
