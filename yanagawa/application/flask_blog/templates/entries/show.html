@@ -1,0 +1,11 @@
+{% extends "layout.html" %} {% block body %}
+<div class="mt-2">
+  <h2>{{ entry.title }}</h2>
+  <br />
+
+  {{ entry.text }}
+
+  <br /><br />
+  投稿日時 {{ entry.created_at }}
+</div>
+{% endblock %}
