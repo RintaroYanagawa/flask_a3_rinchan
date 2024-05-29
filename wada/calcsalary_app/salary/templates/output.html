@@ -2,9 +2,11 @@
 {% block body %}
 
 <p>給与 : {{ '{:,.0f}'.format(salary)}}円の場合、 支給額 : {{ '{:,.0f}'.format(price)}}円、 税額 : {{ '{:,.0f}'.format(tax)}}円 です。</p>
+<p></p>
+<p>今月もお疲れ様でした！</p>
 
 <form action="{{ url_for('show_entries') }}">
-<button type="submit" class="btn btn-primary">戻る</button>
+<button type="submit" class="btn btn-outline-primary" style="color: #89dbfc">戻る</button>
 </form>
 
 {% endblock %}
