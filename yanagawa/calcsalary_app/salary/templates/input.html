@@ -1,5 +1,5 @@
 {% extends "layout.html" %} {% block body %}
-<form action="{{ url_for('output') }}" method="post">
+<form action="{{ url_for('output') }}" method="get">
   <div class="flex flex-col space-y-2">
     <label for="inputSalary" class="text-xl font-bold">給与</label>
     <input
