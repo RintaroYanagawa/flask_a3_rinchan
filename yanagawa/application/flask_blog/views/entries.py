@@ -31,6 +31,9 @@ def new_entry():
 @login_required
 def show_entry(id):
     entry = Entry.query.get(id)
+    if entry is None:
+        flash("記事が存在しません")
+        return redirect(url_for("show_entries"))
     return render_template("entries/show.html", entry=entry)
 
 
@@ -38,6 +41,9 @@ def show_entry(id):
 @login_required
 def edit_entry(id):
     entry = Entry.query.get(id)
+    if entry is None:
+        flash("記事が存在しません")
+        return redirect(url_for("show_entries"))
     return render_template("entries/edit.html", entry=entry)
 
 
@@ -45,6 +51,9 @@ def edit_entry(id):
 @login_required
 def update_entry(id):
     entry = Entry.query.get(id)
+    if entry is None:
+        flash("記事が存在しません")
+        return redirect(url_for("show_entries"))
     entry.title = request.form["title"]
     entry.text = request.form["text"]
     db.session.merge(entry)
@@ -57,6 +66,9 @@ def update_entry(id):
 @login_required
 def delete_entry(id):
     entry = Entry.query.get(id)
+    if entry is None:
+        flash("記事が存在しません")
+        return redirect(url_for("show_entries"))
     db.session.delete(entry)
     db.session.commit()
     flash("記事が削除されました")
