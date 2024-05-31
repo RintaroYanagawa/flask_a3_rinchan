@@ -6,11 +6,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light " style="background-color:rgb(209, 211, 255);">
         <!-- ボタンを押すとviewsに戻る -->
-        <a class="navbar-brand" href="{{url_for('show_entries')}}">Flask Blog</a>
+        <a class="navbar-brand" href="{{url_for('show_entries')}}"><font color = "white">Flask Blog</font></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,6 +21,9 @@
                     <a class="nav-link" href="{{url_for('login')}}">ログイン</a>
                 </li>
                 {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('new_entry') }}">新規投稿</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url_for('logout')}}">ログアウト</a>
                 </li>

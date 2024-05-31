@@ -1,9 +1,4 @@
-# configファイルは、アプリケーションの環境情報や設定情報を記載したファイル
-# デバックモードをONにする
-
-#SQLALCHEMY_DATABASE_URI = 'sqlite:///flask_blog.db'
-#SQLALCHEMY_TRACK_MODIFICATIONS = True
-
+# MySQLを使用する
 import os
 SQLALCHEMY_DATABASE_URI = "mysql+pymysql://{user}:{password}@{host}/{database}?charset={utf8}".format(**{
     "user": os.getenv("DB_USER", "root"),
@@ -14,7 +9,6 @@ SQLALCHEMY_DATABASE_URI = "mysql+pymysql://{user}:{password}@{host}/{database}?c
 })
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# デバックモードをONにする
 DEBUG = True
-SECRET_KEY = 'secret key'
-USERNAME = 'john'
-PASSWORD = '0417'

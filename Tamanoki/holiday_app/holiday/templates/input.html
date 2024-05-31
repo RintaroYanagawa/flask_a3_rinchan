@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
+<form action="{{url_for('maintenance_data')}}" method=post>
+    <div class="form-group">
+        <label for="InputTitle">祝日 日付</label>
+        <input type="date" class="form-control" id="InputTitle" name=holiday value={{input_data}}>
+    </div>
+
+    <div class="form-group">
+        <label for="InputTitle">祝日 テキスト</label>
+        <input type="text" class="form-control" id="InputTitle" name=holiday_text value={{input_data}}>
+    </div>
+
+    <button type="submit" class="btn btn-info">新規登録・更新</button>
+    <button type="submit" class="btn btn-info" style="margin: left 10px">削除</button>
+    
+</form>
+
+<br>
+<button type="submit" class="btn btn-primary">一覧出力</button>
+
+{% endblock %}
