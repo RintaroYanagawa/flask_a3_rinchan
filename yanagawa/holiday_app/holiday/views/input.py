@@ -27,7 +27,8 @@ def create_date():
     db.session.add(holiday)
     db.session.commit()
     message = get_inform_message("I01", date, text)
-    return redirect(url_for("show_maintenance_date", msg=message))
+    flash(message, "info")
+    return redirect(url_for("show_maintenance_date"))
 
 
 @app.route("/date/update", methods=["POST"])
@@ -38,7 +39,8 @@ def update_date():
     db.session.merge(holiday)
     db.session.commit()
     message = get_inform_message("I02", date, text)
-    return redirect(url_for("show_maintenance_date", msg=message))
+    flash(message, "info")
+    return redirect(url_for("show_maintenance_date"))
 
 
 @app.route("/date/delete", methods=["POST"])
@@ -46,9 +48,10 @@ def delete_date():
     date = request.form["holiday"]
     holiday = Holiday.query.get(date)
     if holiday is None:
-        flash(get_inform_message("W01", date))
+        flash(get_inform_message("W01", date), "error")
         return redirect(url_for("show_input_date"))
     db.session.delete(holiday)
     db.session.commit()
     message = get_inform_message("I03", holiday.holi_date, holiday.holi_text)
-    return redirect(url_for("show_maintenance_date", msg=message))
+    flash(message, "info")
+    return redirect(url_for("show_maintenance_date"))

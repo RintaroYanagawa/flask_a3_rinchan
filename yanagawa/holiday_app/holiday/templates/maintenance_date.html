@@ -2,7 +2,11 @@
 <div class="space-y-5">
   <div class="flex flex-col space-y-1">
     <p class="text-xl font-bold">処理結果</p>
-    <p class="text-lg font-bold">{{ message }}</p>
+    <p class="text-lg font-bold">
+      {% with info = get_flashed_messages(category_filter=["info"]) %} {% if
+      info %} {% for msg in info %} {{ msg }} {% endfor %} {% endif %} {%
+      endwith %}
+    </p>
   </div>
   <button type="button" class="btn btn-neutral" onclick="location.href='/'">
     戻る

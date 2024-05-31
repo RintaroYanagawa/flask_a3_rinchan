@@ -28,9 +28,10 @@
     <div></div>
   </header>
   <div class="min-h-[88svh] px-8 py-5 space-y-3">
-    {% if get_flashed_messages()|length > 0 %}
+    {% with errors = get_flashed_messages(category_filter=["error"]) %} {% if
+    errors %}
     <div class="flex flex-col">
-      {% for message in get_flashed_messages() %}
+      {% for message in errors %}
       <div role="alert" class="alert alert-error">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +50,7 @@
       </div>
       {% endfor %}
     </div>
-    {% endif %}
+    {% endif %} {% endwith %}
     <div>{% block body %}{% endblock %}</div>
   </div>
 </div>
