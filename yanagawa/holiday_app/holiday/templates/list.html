@@ -1,0 +1,29 @@
+{% extends "layout.html" %} {% block body %}
+<div class="space-y-5">
+  <div class="overflow-x-auto shadow-lg p-5 mx-16 rounded">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>祝日</th>
+          <th>テキスト</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for holiday in holidays %}
+        <tr>
+          <td class="text-lg font-bold">{{ holiday['date'] }}</td>
+          <td class="text-lg font-bold">{{ holiday['text'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <button
+    type="button"
+    class="btn btn-neutral mx-16"
+    onclick="location.href='/'"
+  >
+    戻る
+  </button>
+</div>
+{% endblock %}

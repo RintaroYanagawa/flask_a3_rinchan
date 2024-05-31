@@ -18,15 +18,16 @@
     },
   };
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
 
-<div data-theme="autumn">
+<div data-theme="emerald">
   <header class="h-[12svh] flex items-center justify-between p-5 shadow">
     <div>
       <h1 class="text-3xl font-bold text-natural-black">祝日マスタ管理</h1>
     </div>
     <div></div>
   </header>
-  <div class="min-h-[88svh] p-5 space-y-3">
+  <div class="min-h-[88svh] px-8 py-5 space-y-3">
     {% if get_flashed_messages()|length > 0 %}
     <div class="flex flex-col">
       {% for message in get_flashed_messages() %}
