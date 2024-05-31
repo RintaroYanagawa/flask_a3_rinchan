@@ -9,24 +9,35 @@ def input():
     return render_template("input.html", input_data = input_data)
 
 
-@app.route('/output',methods=['GET','POST'])
-def output():
-    input_salary = request.form['salary']
-    session["input_data"] = input_salary
-    if input_salary == "":
-        flash('給与が未入力です')
-        return redirect(url_for('input'))
-    elif int(input_salary) < 0:
-        flash('給与にはマイナスの値は入力できません。')
-        return redirect(url_for('input'))
-    elif len(input_salary) >= 11:
-        flash('給与には9,999,999,999まで入力可能です。')
-        return redirect(url_for('input'))
-    else:
-        session["input_data"] = ""
-        input_salary = int(input_salary)
-        pay,tax = calcsalary(input_salary)
-        return render_template("output.html", salary=input_salary, pay=pay, tax=tax)
+
+@app.route('/output', methods=['GET', 'POST'])
+def add():
+    if request.method == 'POST':
+        session["input_data"] = request.form['salary']
+        if request.form['salary'] == "":
+            flash('給料が未入力です。入力してください')
+            return redirect(url_for('input'))
+        elif re.fullmatch("[0-9]+", request.form['salary']) == None:
+            flash('数字で入力してください')
+            return redirect(url_for('input'))
+        elif int(request.form['salary']) > 9999999999:
+            flash('給与には最大9,999,999,999まで入力可能です。')
+            return redirect(url_for('input'))
+        elif int(request.form['salary']) < 0 :
+            flash('給与にはマイナスの値は入力できません')
+            return redirect(url_for('input'))
+        else:
+            session["input_data"] = None
+            input_salary = int(request.form['salary'])
+            if input_salary > 1000000:
+                tax = round((input_salary -1000000) * 0.2 + 100000)
+            else:
+                tax = round(input_salary * 0.1)
+        
+            pay = input_salary - tax
+        
+            return render_template("output.html", salary=input_salary, pay=pay, tax=tax)
+    return redirect(url_for("input"))
     
 def calcsalary(sa):
     if sa<=1000000:
