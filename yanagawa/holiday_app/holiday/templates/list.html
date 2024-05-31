@@ -16,7 +16,9 @@
         </tr>
         {% else %}
         <tr>
-          <td>祝日マスタが登録されていません</td>
+          {% with info = get_flashed_messages(category_filter=["info"]) %} {% if
+          info %} {% for msg in info %} {{ msg }} {% endfor %} {% endif %} {%
+          endwith %}
         </tr>
         {% endfor %}
       </tbody>
