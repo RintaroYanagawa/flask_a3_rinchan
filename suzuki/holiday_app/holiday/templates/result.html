@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% if flag = 1 %}
+<p>{{holidate}} ({{holitext}})が登録されました </p>
+
+{% if flag = 2 %}
+<p>{{holidate}}は「{{holitext}}」に更新されました</p>
+
+{% if flag = 3 %}
+<p>{{holidate}} ({{holitext}})は削除されました</p>
+
+
+    <button type="submit" class="btn btn-primary" onClick="location.href='/'"/>戻る</button>
+
+{% endblock %}
