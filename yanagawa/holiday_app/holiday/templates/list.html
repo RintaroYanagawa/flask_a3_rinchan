@@ -14,6 +14,10 @@
           <td class="text-lg font-bold">{{ holiday['date'] }}</td>
           <td class="text-lg font-bold">{{ holiday['text'] }}</td>
         </tr>
+        {% else %}
+        <tr>
+          <td>祝日マスタが登録されていません</td>
+        </tr>
         {% endfor %}
       </tbody>
     </table>

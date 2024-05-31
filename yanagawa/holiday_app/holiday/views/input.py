@@ -44,12 +44,11 @@ def update_date():
 @app.route("/date/delete", methods=["POST"])
 def delete_date():
     date = request.form["holiday"]
-    text = request.form["holiday_text"]
     holiday = Holiday.query.get(date)
     if holiday is None:
-        flash(get_inform_message("I04"))
+        flash(get_inform_message("W01", date))
         return redirect(url_for("show_input_date"))
     db.session.delete(holiday)
     db.session.commit()
-    message = get_inform_message("I03", date, text)
+    message = get_inform_message("I03", holiday.holi_date, holiday.holi_text)
     return redirect(url_for("show_maintenance_date", msg=message))
