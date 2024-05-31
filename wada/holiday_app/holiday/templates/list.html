@@ -1,0 +1,20 @@
+<!-- 一覧画面 -->
+{%extends "layout.html"%}
+{%block body%}
+
+<table class="table">
+    <tr class="table-primary">
+        <th>祝日</th>
+        <th>テキスト</th>
+    </tr>
+    {% for holiday in holiday_list %}
+    <tr>
+        <td>{{holiday.holi_date}}</td>
+        <td>{{holiday.holi_text}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<button type="button" class="btn btn-primary" onclick="location.href='/'">戻る</button>
+
+{%endblock%}

@@ -1,0 +1,18 @@
+<!-- 結果画面 -->
+{% extends "layout.html" %}
+{% block body %}
+
+{% if flag == 1 %}
+<p>{{holiday_date}}（{{holiday_text}}）が登録されました</p>
+
+{% elif flag == 2 %}
+<p>{{holiday_date}}（{{holiday_text}}）が更新されました</p>
+
+{% elif flag == 3 %}
+<p>{{holiday_date}}（{{holiday_text}}）が削除されました</p>
+
+{% endif %}
+
+<button type="button" class="btn btn-primary" onclick="location.href='/'">戻る</button>
+
+{% endblock %} 
