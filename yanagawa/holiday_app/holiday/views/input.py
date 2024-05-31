@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, render_template, flash, session
+from flask import request, redirect, url_for, render_template, flash
 from holiday import app, db
 from holiday.models.mst_holiday import Holiday
 from holiday.utils import get_inform_message

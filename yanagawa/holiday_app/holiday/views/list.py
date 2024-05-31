@@ -1,7 +1,6 @@
-from flask import request, redirect, url_for, render_template, flash, session
-from holiday import app, db
+from flask import render_template
+from holiday import app
 from holiday.models.mst_holiday import Holiday
-from holiday.utils import get_inform_message
 
 
 @app.route("/list", methods=["GET"])

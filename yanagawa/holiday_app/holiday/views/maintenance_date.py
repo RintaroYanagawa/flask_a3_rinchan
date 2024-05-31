@@ -1,6 +1,5 @@
-from flask import request, redirect, url_for, render_template, flash, session
-from holiday import app, db
-from holiday.models.mst_holiday import Holiday
+from flask import request, render_template
+from holiday import app
 
 
 @app.route("/maintenance_date", methods=["GET"])
