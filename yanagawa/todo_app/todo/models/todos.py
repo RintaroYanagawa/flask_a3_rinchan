@@ -11,9 +11,11 @@ class Todos(db.Model):
     public_id = db.Column(CHAR(21), unique=True, nullable=False)
     title = db.Column(db.String(50), nullable=False)
     contents = db.Column(db.String(500), nullable=False)
+    limit = db.Column(db.DateTime, nullable=False)
+    is_done = db.Column(db.Boolean, default=False)
     user_id = db.Column(
         "user_id",
-        db.String(10),
+        CHAR(36),
         db.ForeignKey("users.id", onupdate="CASCADE", ondelete="CASCADE"),
     )
     created_at = db.Column(
@@ -25,19 +27,22 @@ class Todos(db.Model):
         server_default=db.text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"),
     )
 
-    def __init__(self, title, contents, user_id):
+    def __init__(self, title, contents, limit, user_id):
         self.id = uuid7str()
         self.public_id = generate()
         self.title = title
         self.contents = contents
+        self.limit = limit
         self.user_id = user_id
 
     def __repr__(self):
-        return "<Todos id:{} public_id:{} title:{} contents:{} user_id:{} created_at:{} updated_at:{}>".format(
+        return "<Todos id:{} public_id:{} title:{} contents:{} limit:{} is_done:{} user_id:{} created_at:{} updated_at:{}>".format(
             self.id,
             self.public_id,
             self.title,
             self.contents,
+            self.limit,
+            self.is_done,
             self.user_id,
             self.created_at,
             self.updated_at,

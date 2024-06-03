@@ -3,7 +3,7 @@ from todo import app, db
 from todo.models.users import Users
 
 
-@app.route("/users", methods=["GET"])
+@app.route("/api/users", methods=["GET"])
 def select_users():
     users = list(
         map(
@@ -21,9 +21,11 @@ def select_users():
     return jsonify({"ok": True, "data": users})
 
 
-@app.route("/user", methods=["POST"])
+@app.route("/api/user", methods=["POST"])
 def create_user():
     json = request.get_json()
+
+    print(json)
 
     public_id = json["public_id"]
     password = json["password"]
@@ -45,13 +47,13 @@ def create_user():
     )
 
 
-@app.route("/user/<string:id>", methods=["GET"])
+@app.route("/api/user/<string:id>", methods=["GET"])
 def select_user(id):
     user = Users.query.get(id)
     if user is None:
         return jsonify({"ok": False, "error": "not exists user"})
 
-    uuid = (user.id,)
+    uuid = user.id
     public_id = user.public_id
     name = user.name
     created_at = user.created_at

@@ -1,0 +1,60 @@
+{% extends "layout.html" %} {% block body %}
+<script>
+  const handleClickIsDone = async () => {
+    const publicId = "{{todo.public_id}}";
+    const title = "{{todo.title}}";
+    const contents = "{{todo.contents}}";
+    const limit = "{{todo.limit}}";
+    const isDone = document.getElementById("isDone").checked;
+    const userId = "{{todo.user_id}}";
+
+    await fetch("/api/todo", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        public_id: publicId,
+        title: title,
+        contents: contents,
+        limit: limit,
+        is_done: isDone,
+        user_id: userId,
+      }),
+    });
+
+    window.location.reload();
+  };
+</script>
+<div class="space-y-3 bg-white rounded-lg shadow p-8 mx-32 my-8">
+  <div class="space-y-2">
+    <p class="text-2xl font-bold">Title</p>
+    <p class="text-xl">{{todo.title}}</p>
+  </div>
+  <div class="divider"></div>
+  <div class="space-y-2">
+    <p class="text-2xl font-bold">Contents</p>
+    <p class="text-xl">{{todo.contents}}</p>
+  </div>
+  <div class="divider"></div>
+  <div class="space-y-2">
+    <p class="text-2xl font-bold">Limit</p>
+    <p class="text-xl">{{todo.limit}}</p>
+  </div>
+  <div class="divider"></div>
+  <div class="space-y-2">
+    <p class="text-2xl font-bold">Is Done</p>
+    <input id="isDone" type="checkbox" {{'checked' if todo.is_done == True else
+    ''}} class="checkbox" onchange="handleClickIsDone()"/>
+  </div>
+  <div class="flex items-center justify-end">
+    <button
+      type="button"
+      class="btn btn-neutral"
+      onclick="location.href='/list'"
+    >
+      Back
+    </button>
+  </div>
+</div>
+{% endblock %}

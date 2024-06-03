@@ -6,6 +6,6 @@ app.config.from_object("todo.config")
 
 db = SQLAlchemy(app)
 
-from todo.views import user  # noqa: E402
+from todo.views import page, session, user, todo  # noqa: E402
 
-__all__ = ["user"]
+__all__ = ["page", "session", "user", "todo"]
