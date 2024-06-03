@@ -1,0 +1,19 @@
+.card {
+    margin: o.25rem;
+}
+
+.blog-body {
+    padding: 1.25rem;
+}
+
+* {
+    font-family: "Meiryo";
+}
+
+.btn {
+    transition: transform 0.2s ease;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}

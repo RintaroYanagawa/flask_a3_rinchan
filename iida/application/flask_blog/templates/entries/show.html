@@ -7,6 +7,12 @@
 {{entry.text}}
 
 <br><br>
+
+<div class="btn-group">
+    <button class="btn good-btn btn-primary" data-entry-id="{{entry.id}}">{{entry.good_count}} good</button>
+    <button class="btn btn-primary favorite-btn" data-entry-id="{{entry.id}}"  style="background-color: {{'red' if entry.favorite else 'gray'}}; margin-left:10px">お気に入り</button>
+</div>
+<br>
 投稿日時{{entry.created_at}}
 
 <br><br>
@@ -17,8 +23,45 @@
     </form>
 
     <form action="{{url_for('delete_entry', id=entry.id)}}" method="post">
-        <button type="submit" class="btn btn-secondary" style="margin-left:5px">削除</button>
+        <button type="submit" class="btn btn-danger" style="margin-left:10px">削除</button>
     </form>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var buttons = document.querySelectorAll('.good-btn');
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var entryId = this.getAttribute('data-entry-id');
+                fetch('/like/' + entryId, {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    this.textContent = data.good_count + ' good';
+                });
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var buttons = document.querySelectorAll('.favorite-btn');
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var entryId = this.getAttribute('data-entry-id');
+            fetch('/favorite/' + entryId, {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                this.style.backgroundColor = data.favorite ? 'red' : 'gray';
+            });
+        });
+    });
+});
+</script>
 
 {% endblock %}
