@@ -1,0 +1,31 @@
+{% extends "layout.html" %} {% block body %}
+<div class="space-y-5">
+  <div class="flex items-center justify-end">
+    <button
+      type="button"
+      class="btn btn-primary"
+      onclick="location.href='/todo/new'"
+    >
+      New Todo
+    </button>
+  </div>
+  <div class="grid grid-cols-3 gap-4">
+    {% for todo in todos %}
+    <div class="card w-96 bg-white shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">{{ todo.title }}</h2>
+        <div class="card-actions justify-end">
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="location.href='/todo/{{todo.public_id}}'"
+          >
+            More
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

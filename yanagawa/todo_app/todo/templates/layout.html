@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<title>Todo</title>
+
+<link
+  href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+
+<div data-theme="nord">
+  <header class="h-[8svh] flex items-center justify-between p-5 shadow">
+    <div>
+      <h1 class="text-3xl font-bold select-none">Todo</h1>
+    </div>
+    <div>
+      {% if not session.logged_in %}
+      <a href="/login" class="text-lg">login</a>
+      {% else %}
+      <a href="/logout" class="text-lg">logout</a>
+      {% endif %}
+    </div>
+  </header>
+  <div class="min-h-[92svh] px-8 py-5 space-y-3">
+    {% block body %}{% endblock %}
+  </div>
+</div>
