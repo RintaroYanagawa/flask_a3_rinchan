@@ -3,12 +3,12 @@
 {% block body %}
 <form action="{{ url_for('update_holiday') }}" method=post>
     <div class="form-group">
-        <label for="InputTitle">祝日 日付</label>
+        <label>祝日 日付</label>
         <input type="date" class="form-control" name="holiday">
     </div>
 
     <div class="form-group">
-        <label for="InputPassword">祝日 テキスト</label>
+        <label>祝日 テキスト</label>
         <input type="text" class="form-control" name="holiday_text">
     </div>
 
