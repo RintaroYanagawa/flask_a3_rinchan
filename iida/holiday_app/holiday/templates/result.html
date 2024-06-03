@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<h5>処理結果</h5>
+
+
+
+{% if flag=="更新" %}
+<div class="output">
+    <p>{{"{}は、「{}」に更新されました".format(holi_date, holi_text)}}</p>
+</div>
+
+{% elif flag=="新規登録" %}
+<div class="output">
+    <p>{{"{}({})は、登録されました".format(holi_date, holi_text)}}</p>
+</div>
+
+{% elif flag=="削除" %}
+<div class="output">
+    <p>{{"{}({})は、削除されました".format(holi_date, holi_text)}}</p>
+</div>
+
+{% endif %}
+
+<a href="{{url_for('show_entries')}}">
+    <button type="submit" class="btn btn-primary">戻る</button>
+</a>
+
+{% endblock %}

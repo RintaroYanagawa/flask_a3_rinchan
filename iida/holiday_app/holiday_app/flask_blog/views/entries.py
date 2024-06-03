@@ -1,7 +1,7 @@
 from flask import request, redirect, url_for, render_template, flash, session
-from flask_blog import app
-from flask_blog.models.entries import Entry
-from flask_blog import db
+from holiday import app
+from projects.flask_a3_rinchan.iida.holiday_app.holiday.models.mst_holiday import Entry
+from holiday import db
 from functools import wraps
 
 

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<table class="table table-striped">
+    <tr style="background-color:#92beff">
+        <th>祝日</th>
+        <th>テキスト</th>
+    </tr>
+    {% for holiday in holidays %}
+    <tr>
+        <td>{{holiday.holi_date}}</td>
+        <td>{{holiday.holi_text}}</td>
+    </tr>
+    {% else %}
+    祝日マスタが登録されていません
+    {% endfor %}
+</table>
+
+<a href="{{url_for('show_entries')}}">
+    <button type="submit" class="btn btn-primary">戻る</button>
+</a>
+
+{% endblock %}
