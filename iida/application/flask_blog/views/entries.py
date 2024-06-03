@@ -3,6 +3,7 @@ from flask_blog import app
 from flask_blog.models.entries import Entry
 from flask_blog import db
 from functools import wraps
+from flask import abort, jsonify
 
 
 def login_required(view):
@@ -13,11 +14,18 @@ def login_required(view):
         return view(*args, **kwargs)
     return inner
 
+
 @app.route("/")
 @login_required
 def show_entries():
-    entries = Entry.query.order_by(Entry.id.desc()).all()
-    return render_template("entries/index.html", entries=entries)
+    sort_by = request.args.get('sort_by', default='id', type=str)
+    if sort_by == 'good_count':
+        entries = Entry.query.order_by(Entry.good_count.desc()).all()
+    elif sort_by=="favorite":
+        entries = Entry.query.filter(Entry.favorite == True).all()
+    else:
+        entries = Entry.query.order_by(Entry.id.desc()).all()
+    return render_template("entries/index.html", entries=entries, sort_by=sort_by)
 
 
 @app.route("/entries", methods=["POST"])
@@ -70,3 +78,22 @@ def delete_entry(id):
     db.session.commit()
     flash("投稿が削除されました")
     return redirect(url_for("show_entries"))
+
+# いいね機能
+@app.route('/like/<int:entry_id>', methods=['POST'])
+def like(entry_id):
+    entry = Entry.query.get(entry_id)
+    if entry is None:
+        abort(404)
+    entry.good_count += 1
+    db.session.commit()
+    return jsonify({'good_count': entry.good_count})
+
+@app.route('/favorite/<int:entry_id>', methods=['POST'])
+def favorite(entry_id):
+    entry = Entry.query.get(entry_id)
+    if entry is None:
+        abort(404)
+    entry.favorite = not entry.favorite
+    db.session.commit()
+    return jsonify(favorite=entry.favorite)

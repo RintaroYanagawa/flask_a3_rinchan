@@ -5,7 +5,7 @@ from holiday.models.mst_holiday import Holiday
 
 @app.route("/maintenance_date", methods=["post"])
 def maintenance_date():
-    # バリエーション
+    # バリデーション
     if request.form['holiday'] == "":
         flash("祝日日付を入力してください")
         return redirect(url_for("show_entries"))

@@ -1,12 +1,26 @@
 {% extends "layout.html" %}
 {% block body %}
 
+<select id="sort-select" onchange="location.href = '/?sort_by=' + this.value">
+    <option value="id" {% if sort_by == 'id' %}selected{% endif %}>ID順</option>
+    <option value="good_count" {% if sort_by == 'good_count' %}selected{% endif %}>いいねの数順</option>
+    <option value="favorite" {% if sort_by == 'favorite' %}selected{% endif %}>お気に入り</option>
+</select>
+
+
+
 <ul class="list-group list-group-flush">
 {% for entry in entries %}
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{entry.title}}</h5>
-            <a href="{{url_for('show_entry', id=entry.id)}}" class="card-link">続きを読む</a>
+            <div class="d-flex justify-content-between">
+                <h5 class="card-title">{{entry.title}}</h5>
+                <button class="btn btn-primary favorite-btn" data-entry-id="{{entry.id}}"  style="background-color: {{'red' if entry.favorite else 'gray'}}">お気に入り</button>
+            </div>
+            <div class="d-flex justify-content-between">
+                <a href="{{url_for('show_entry', id=entry.id)}}" class="card-link">続きを読む</a>
+                <button class="btn btn-primary good-btn" data-entry-id="{{entry.id}}">{{entry.good_count}} good</button>
+            </div>
         </div>
     </div>
 {% else %}
@@ -14,5 +28,44 @@
 {% endfor %}
 
 </ul>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var buttons = document.querySelectorAll('.favorite-btn');
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var entryId = this.getAttribute('data-entry-id');
+            fetch('/favorite/' + entryId, {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                this.style.backgroundColor = data.favorite ? 'red' : 'gray';
+            });
+        });
+    });
+});
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var buttons = document.querySelectorAll('.good-btn');
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var entryId = this.getAttribute('data-entry-id');
+                fetch('/like/' + entryId, {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    this.textContent = data.good_count + ' good';
+                });
+            });
+        });
+    });
+</script>
 
 {% endblock %}
