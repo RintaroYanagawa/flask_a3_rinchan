@@ -1,16 +1,19 @@
 {% extends "layout.html" %}
 {% block body %}
 
-{% if flag = 1 %}
-<p>{{holidate}} ({{holitext}})が登録されました </p>
+{% if flag == 1 %}
+<p>{{holiday_date}} ({{holiday_text}})が登録されました </p>
+{% endif %}
 
-{% if flag = 2 %}
-<p>{{holidate}}は「{{holitext}}」に更新されました</p>
+{% if flag == 2 %}
+<p>{{holiday_date}}は「{{holiday_text}}」に更新されました</p>
+{% endif %}
 
-{% if flag = 3 %}
-<p>{{holidate}} ({{holitext}})は削除されました</p>
+{% if flag == 3 %}
+<p>{{holiday_date}}は削除されました</p>
+{% endif %}
 
 
-    <button type="submit" class="btn btn-primary" onClick="location.href='/'"/>戻る</button>
+<button type="submit" class="btn btn-primary" onClick="location.href='/'"/>戻る</button>
 
 {% endblock %}

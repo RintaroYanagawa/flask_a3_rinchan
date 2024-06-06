@@ -12,5 +12,3 @@ SQLALCHEMY_DATABASE_URI = "mysql+pymysql://{user}:{password}@{host}/{database}?c
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 DEBUG = True
 SECRET_KEY = 'secret key'
-USERNAME = 'john'
-PASSWORD = 'due123'

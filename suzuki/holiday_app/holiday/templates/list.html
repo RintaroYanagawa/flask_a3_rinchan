@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">祝日</th>
+            <th scope="col">テキスト</th>
+        </tr>
+    </thead>
+
+{% for entry in holiday_list %}
+    <tbody>
+        <tr>
+            <td>{{entry.holi_date}} </td>
+            <td>{{entry.holi_text}}</td>
+        </tr>
+    </tbody>
+
+{% else %}
+投稿がありません
+{% endfor %}
+</table>
+<button type="submit" class="btn btn-primary" onClick="location.href='/'"/>戻る</button>
+
+
+{% endblock %}
